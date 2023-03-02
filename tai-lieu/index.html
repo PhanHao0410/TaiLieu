@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <div class="bai-1">
+            <h4>Bài 1: Viết một function có input là 1 string, output là string đầu vào được viết hoa chữ cái đầu và
+                viết
+                thường chữ
+                cái còn lại?</h4>
+            <form onsubmit="submitForm(event)">
+                <input type="text" id="inputBai1">
+                <input type="submit" />
+            </form>
+            <div id="bai1"></div>
+        </div>
+        <div class="bai-2">
+            <h4>
+                Bài 2: Viết 1 function có input là 1 array gồm các số nguyên có thể trùng nhau, output là
+                1 array gồm các số nguyên đã loại bỏ các số trùng nhau đồng thời số lẻ được sắp xếp trc số chẵn theo
+                thứ tự từ bé đến lớn?
+            </h4>
+            <form onsubmit="submitForm2(event)">
+                <input type="text" placeholder="Note: Nhập số + space" id="inputBai2">
+                <input type="submit" />
+            </form>
+            <div id="testThu"></div>
+            <div id="bai2"></div>
+        </div>
+        <div class="bai3">
+            <h4>
+                Bài 3: Viết 1 function có input là 1 array gồm các boolean, trả về false nếu có ít nhất
+                1 phần tử false, không thì true? (Sử dụng Array.reduce)
+                [true,true,true] =>true
+                [true,true,false] =>false
+            </h4>
+            <form id="mainForm" name="mainForm">
+                <input type="radio" name="boolean" value="true" />True
+                <input type="radio" name="boolean" value="false" />False
+            </form>
+            <form id="mainForm1" name="mainForm1">
+                <input type="radio" name="boolean1" value="true" />True
+                <input type="radio" name="boolean1" value="false" />False
+            </form>
+            <form id="mainForm2" name="mainForm2">
+                <input type="radio" name="boolean2" value="true" />True
+                <input type="radio" name="boolean2" value="false" />False
+            </form>
+
+        </div>
+
+    </div>
+    <script language="javascript">
+        // Bài 1
+        function submitForm(event) {
+            event.preventDefault();
+            var ele = document.getElementById("inputBai1");
+            var textInput = ele.value;
+            textInput = textInput.toLowerCase();
+            document.getElementById('bai1').innerHTML = `${textInput.charAt(0).toUpperCase() + textInput.slice(1)}`
+        }
+
+        // Bài 2:
+        function sapXepArray(numbers) {
+            var numberNew = [];
+            numberNew = numbers.filter(function (number) {
+                if (numberNew.includes(number) !== true) {
+                    numberNew.push(number);
+                }
+                //console.log(numberNew);
+                numberNew.sort((a, b) => a - b);
+                //console.log("check thứ tự: ", numberNew);
+                numberNew.sort((a, b) => {
+                    if (a % 2 !== 0 & a - b) {
+                        return -1;
+                    }
+                })
+                //console.log("check chia hết cho 2: ", numberNew);
+                document.getElementById("bai2").innerHTML = ` Kết quả: ${numberNew} `;
+            })
+        }
+        function submitForm2(event) {
+            event.preventDefault();
+            var ele2 = document.getElementById("inputBai2");
+            var textInput2 = ele2.value;
+            var arr2 = textInput2.split(' ');
+            sapXepArray(arr2);
+        }
+        //sapXepArray([3, 6, 8, 4, 2, 6, 4, 21, 3, 5, 0, 12, 15]);
+        //console.log(sapXepArray([3, 6, 8, 4, 2, 6, 4, 5, 0, 12, 15]))
+        // Bài 3:
+        document.mainForm.onclick = function () {
+            var boolean = document.querySelector('input[name = boolean]:checked').value;
+            console.log("Check boolean: ", boolean);
+        }
+        document.mainForm1.onclick = function () {
+            var boolean1 = document.querySelector('input[name = boolean1]:checked').value;
+            console.log("Check boolean 1: ", boolean1);
+        }
+        document.mainForm2.onclick = function () {
+            var boolean2 = document.querySelector('input[name = boolean2]:checked').value;
+            console.log("Check boolean 2: ", boolean2);
+        }
+
+    </script>
+</body>
+
+</html>
